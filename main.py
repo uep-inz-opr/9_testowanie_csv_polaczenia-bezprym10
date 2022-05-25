@@ -1,8 +1,11 @@
 import unittest
 from unittest import TestCase
 import csv
+import requests
 
-nazwa_pliku = input()
+plik_csv = 'https://raw.githubusercontent.com/khashishin/repozytorium_z_plikiem_polaczenia/main/phoneCalls.csv'
+r = requests.get(plik_csv, allow_redirects=True)
+open('phoneCalls.csv').write(r.content)
 
 class MenadzerPolaczen:
   def __init__(self, filename):
@@ -29,6 +32,9 @@ class MenadzerPolaczen:
 class SprawdzDzwoniacegoTest(TestCase):
   def test_czy_abonent_najczesciej_dzwonioncy_rozpoznany_poprawnie(self):
       if __name__ == "__main__":
-        mp = MenadzerPolaczen(nazwa_pliku)
+        mp = MenadzerPolaczen("phoneCalls.csv")
       wynik = mp.pobierz_najczesciej_dzwoniacego()
-      print (wynik)
+      self.assertEqual((226,5), wynik)
+
+if __name__ == '__main__':
+    print(MenadzerPolaczen(input()).pobierz_najczesciej_dzwoniacego())
