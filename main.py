@@ -5,7 +5,7 @@ import requests
 
 plik_csv = 'https://raw.githubusercontent.com/khashishin/repozytorium_z_plikiem_polaczenia/main/phoneCalls.csv'
 r = requests.get(plik_csv, allow_redirects=True)
-open('phoneCalls.csv').write(r.content)
+open('phoneCalls.csv', 'wb').write(r.content)
 
 class MenadzerPolaczen:
   def __init__(self, filename):
